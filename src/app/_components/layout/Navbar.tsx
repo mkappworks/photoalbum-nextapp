@@ -14,7 +14,7 @@ import {
   SheetTrigger,
 } from "../ui/sheet";
 
-import { buttonVariants } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
 import { Menu } from "lucide-react";
 import { ModeToggle } from "../ModeToggle";
 import { LogoIcon } from "../Icons";
@@ -65,6 +65,7 @@ export const Navbar = () => {
           <NavbarDesktop />
 
           <div className="hidden gap-2 md:flex">
+            <Button>Sign In</Button>
             <ModeToggle />
           </div>
         </NavigationMenuList>
@@ -94,11 +95,11 @@ const NavbarMobile = ({
           </Menu>
         </SheetTrigger>
 
-        <SheetContent side={"left"}>
+        <SheetContent side={"left"} className="w-60">
           <SheetHeader>
-            <SheetTitle className="text-xl font-bold">Shadcn/React</SheetTitle>
+            <SheetTitle className="text-xl font-bold">Photo Album</SheetTitle>
           </SheetHeader>
-          <nav className="mt-4 flex flex-col items-center justify-center gap-2">
+          <nav className="flex flex-col items-center justify-center gap-2">
             {routeList.map(({ href, label }: RouteProps) => (
               <a
                 rel="noreferrer noopener"
@@ -110,6 +111,7 @@ const NavbarMobile = ({
                 {label}
               </a>
             ))}
+            <Button>Sign In</Button>
           </nav>
         </SheetContent>
       </Sheet>
