@@ -17,8 +17,7 @@ import {
 import { buttonVariants } from "../ui/button";
 import { Menu } from "lucide-react";
 import { ModeToggle } from "../ModeToggle";
-import { LogoIcon, LogoIconDark } from "../Icons";
-import { useTheme } from "next-themes";
+import { LogoIcon } from "../Icons";
 
 interface RouteProps {
   href: string;
@@ -46,7 +45,6 @@ const routeList: RouteProps[] = [
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { theme } = useTheme();
 
   return (
     <header className="sticky top-0 z-40 w-full border-b-[1px] bg-white dark:border-b-slate-700 dark:bg-background">
@@ -58,7 +56,7 @@ export const Navbar = () => {
               href="/"
               className="ml-2 flex items-center justify-center text-xl font-bold"
             >
-              {theme !== "light" ? <LogoIconDark /> : <LogoIcon />}
+              <LogoIcon />
               <span className="ml-2">Photo Album</span>
             </a>
           </NavigationMenuItem>

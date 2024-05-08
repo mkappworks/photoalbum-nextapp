@@ -1,4 +1,4 @@
-import { LogoIconDark } from "../Icons";
+import { LogoIcon } from "../Icons";
 
 export const Footer = () => {
   return (
@@ -12,8 +12,8 @@ export const Footer = () => {
             href="/"
             className="ml-2 flex items-center justify-center text-xl font-bold"
           >
-            <LogoIconDark />
-            Photo Album
+            <LogoIcon />
+            <span className="ml-2">Photo Album</span>
           </a>
         </div>
 
