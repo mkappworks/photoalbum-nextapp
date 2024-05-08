@@ -6,7 +6,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 import { Navbar } from "~/app/_components/layout/Navbar";
 import { ThemeProvider } from "./_components/ThemeProvider";
 import { settings } from "~/lib/settings";
-import { Footer } from "./_components/Footer";
+import { Footer } from "./_components/layout/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
