@@ -18,6 +18,13 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/logo.svg" }],
 };
 
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -26,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} bg-background text-primary flex min-h-screen flex-col`}
+        className={`${inter.className} flex min-h-screen flex-col bg-background text-primary`}
       >
         {" "}
         <TRPCReactProvider>
