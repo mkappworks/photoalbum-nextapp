@@ -6,6 +6,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 import { Navbar } from "~/app/_components/layout/Navbar";
 import { ThemeProvider } from "./_components/ThemeProvider";
 import { settings } from "~/lib/settings";
+import { Footer } from "./_components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,17 +36,18 @@ export default function RootLayout({
       <body
         className={`${inter.className} flex min-h-screen flex-col bg-background text-primary`}
       >
-        {" "}
         <TRPCReactProvider>
           {settings.themeToggleEnabled ? (
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <Navbar />
               {children}
+              <Footer />
             </ThemeProvider>
           ) : (
             <ThemeProvider attribute="class" forcedTheme="light" enableSystem>
               <Navbar />
               {children}
+              <Footer />
             </ThemeProvider>
           )}
         </TRPCReactProvider>
