@@ -56,7 +56,7 @@ export const Navbar = () => {
             <a
               rel="noreferrer noopener"
               href="/"
-              className="ml-2 flex  items-center justify-center text-xl font-bold"
+              className="ml-2 flex items-center justify-center text-xl font-bold"
             >
               {theme !== "light" ? <LogoIconDark /> : <LogoIcon />}
               <span className="ml-2">Photo Album</span>
