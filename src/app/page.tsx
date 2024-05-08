@@ -1,3 +1,4 @@
+import { FAQ } from "./_components/FAQ";
 import { Features } from "./_components/Features";
 import { Hero } from "./_components/Hero";
 import { Pricing } from "./_components/Pricing";
@@ -10,6 +11,7 @@ export default async function Home() {
       <Features />
       <Testimonials />
       <Pricing />
+      <FAQ />
     </main>
   );
 }
