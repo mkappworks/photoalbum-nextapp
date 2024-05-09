@@ -1,8 +1,8 @@
-import { FAQ } from "./_components/FAQ";
-import { Features } from "./_components/Features";
-import { Hero } from "./_components/Hero";
-import { Pricing } from "./_components/Pricing";
-import { Testimonials } from "./_components/Testimonials";
+import { FAQ } from "./_components/home/faq";
+import { Features } from "./_components/home/features";
+import { Hero } from "./_components/home/hero";
+import { Pricing } from "./_components/home/pricing";
+import { Testimonials } from "./_components/home/testimonials";
 
 export default async function Home() {
   return (

@@ -1,5 +1,5 @@
 import Image, { type StaticImageData } from "next/image";
-import logoIcon from "../../../public/logo.svg";
+import logoIcon from "../../../../public/logo.svg";
 
 export const LogoIcon = () => {
   return (

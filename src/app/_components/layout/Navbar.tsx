@@ -16,8 +16,8 @@ import {
 
 import { Button, buttonVariants } from "../ui/button";
 import { Menu } from "lucide-react";
-import { ModeToggle } from "../ModeToggle";
-import { LogoIcon } from "../Icons";
+import { ThemeToggle } from "./theme-toggle/theme-toggle";
+import { LogoIcon } from "../home/icons";
 import Link from "next/link";
 import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 import { useSession } from "next-auth/react";
@@ -101,7 +101,7 @@ export const Navbar = () => {
                 <Button> {session ? "Sign out" : "Sign in"}</Button>
               </Link>
             </div>
-            <ModeToggle />
+            <ThemeToggle />
           </div>
         </NavigationMenuList>
       </NavigationMenu>
@@ -120,7 +120,7 @@ const NavbarMobile = ({
 }) => {
   return (
     <span className="flex md:hidden">
-      <ModeToggle />
+      <ThemeToggle />
 
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger className="px-2">

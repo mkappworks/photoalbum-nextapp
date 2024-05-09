@@ -1,14 +1,14 @@
-import { Button } from "./ui/button";
+import { Button } from "../../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "../../ui/dropdown-menu";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 
-export function ModeToggle() {
+export function ThemeToggle() {
   const { setTheme } = useTheme();
 
   return (

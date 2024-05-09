@@ -1,15 +1,15 @@
-import { Badge } from "./ui/badge";
+import { Badge } from "../ui/badge";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card";
+} from "../ui/card";
 
-import image from "../../../public//assets/growth.png";
-import image3 from "../../../public/assets/reflecting.png";
-import image4 from "../../../public/assets/looking-ahead.png";
+import image from "../../../../public//assets/growth.png";
+import image3 from "../../../../public/assets/reflecting.png";
+import image4 from "../../../../public/assets/looking-ahead.png";
 import Image, { type StaticImageData } from "next/image";
 
 interface FeatureProps {
