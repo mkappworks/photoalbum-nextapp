@@ -17,10 +17,9 @@ import {
 import { Button, buttonVariants } from "../ui/button";
 import { Menu } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle/theme-toggle";
-import { LogoIcon } from "../home/icons";
-import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { UserDropdownMenu } from "./user-dropdown-menu";
+import { LogoIconName } from "../logo-icon-name";
 
 interface RouteProps {
   href: string;
@@ -58,14 +57,7 @@ export const Navbar = () => {
       <NavigationMenu className="mx-auto">
         <NavigationMenuList className="container flex h-14 w-screen justify-between px-4 ">
           <NavigationMenuItem className="flex font-bold">
-            <a
-              rel="noreferrer noopener"
-              href="/"
-              className="ml-2 flex items-center justify-center text-xl font-bold"
-            >
-              <LogoIcon />
-              <span className="ml-2">Photo Album</span>
-            </a>
+            <LogoIconName />
           </NavigationMenuItem>
 
           <MobileSidebar
@@ -80,9 +72,7 @@ export const Navbar = () => {
               {session ? (
                 <UserDropdownMenu />
               ) : (
-                <Link href="/api/auth/signin">
-                  <Button>Sign in</Button>
-                </Link>
+                <Button onClick={() => signIn()}>Sign In</Button>
               )}
               <ThemeToggle />
             </div>
@@ -132,7 +122,7 @@ const MobileSidebar = ({
                 {label}
               </a>
             ))}
-            <Button>Sign In</Button>
+            <Button onClick={() => signIn()}>Sign In</Button>
           </nav>
         </SheetContent>
       </Sheet>

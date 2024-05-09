@@ -1,4 +1,4 @@
-import { LogoIcon } from "../home/icons";
+import { LogoIconName } from "../logo-icon-name";
 
 export const Footer = () => {
   return (
@@ -7,14 +7,7 @@ export const Footer = () => {
 
       <section className="container grid grid-cols-2 gap-x-12 gap-y-8 py-20 md:grid-cols-4 xl:grid-cols-6">
         <div className="col-span-full xl:col-span-2">
-          <a
-            rel="noreferrer noopener"
-            href="/"
-            className="ml-2 flex items-center justify-center text-xl font-bold"
-          >
-            <LogoIcon />
-            <span className="ml-2">Photo Album</span>
-          </a>
+          <LogoIconName />
         </div>
 
         <div className="flex flex-col gap-2">
