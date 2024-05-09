@@ -3,11 +3,8 @@ import "~/styles/globals.css";
 import { Inter } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
-
 import { getServerAuthSession } from "~/server/auth";
 import { Providers } from "./_components/layout/providers";
-import { Navbar } from "./_components/layout/navbar";
-import { Footer } from "./_components/layout/footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,11 +37,7 @@ export default async function RootLayout({
         className={`${inter.className} flex min-h-screen flex-col bg-background text-primary`}
       >
         <TRPCReactProvider>
-          <Providers session={session}>
-            <Navbar />
-            {children}
-            <Footer />
-          </Providers>
+          <Providers session={session}>{children}</Providers>
         </TRPCReactProvider>
       </body>
     </html>
