@@ -6,6 +6,7 @@ import {
 } from "next-auth";
 import { type Adapter } from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 import { env } from "~/env";
 import { db } from "~/server/db";
@@ -53,7 +54,34 @@ export const authOptions: NextAuthOptions = {
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
+    CredentialsProvider({
+      credentials: {
+        username: { label: "Username", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(_) {
+        let user;
+
+        // logic to salt and hash password
+        // const pwHash = saltAndHashPassword(credentials.password);
+
+        // logic to verify if user exists
+        // user = await getUserFromDb(credentials.email, pwHash);
+
+        if (!user) {
+          // No user found, so this is their first attempt to login
+          // meaning this is also the place you could do registration
+          throw new Error("User not found.");
+        }
+
+        // return user object with the their profile data
+        return user;
+      },
+    }),
   ],
+  pages: {
+    signIn: "/signin",
+  },
 };
 
 /**
