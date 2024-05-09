@@ -19,8 +19,8 @@ import { Menu } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle/theme-toggle";
 import { LogoIcon } from "../home/icons";
 import Link from "next/link";
-import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 import { useSession } from "next-auth/react";
+import { UserDropdownMenu } from "./user-dropdown-menu";
 
 interface RouteProps {
   href: string;
@@ -48,24 +48,10 @@ const nonSessionRouteList: RouteProps[] = [
 
 const sessionRouteList: RouteProps[] = [];
 
-function getInitials(name: string): string {
-  const words: string[] = name.split(" ");
-
-  let initials = "";
-
-  words.forEach((word) => {
-    initials += word.charAt(0).toUpperCase();
-  });
-
-  return initials;
-}
-
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { data: session } = useSession();
   const routeList = session ? sessionRouteList : nonSessionRouteList;
-
-  const fallBackName = getInitials(session?.user?.name ?? "");
 
   return (
     <header className="sticky top-0 z-40 w-full border-b-[1px] bg-white dark:border-b-slate-700 dark:bg-background">
@@ -82,26 +68,24 @@ export const Navbar = () => {
             </a>
           </NavigationMenuItem>
 
-          <NavbarMobile
+          <MobileSidebar
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             routeList={routeList}
           />
-          <NavbarDesktop routeList={routeList} />
+          <MainNavBar routeList={routeList} />
 
           <div className="hidden items-center justify-center gap-2 md:flex">
             <div className="flex items-center justify-center gap-4">
-              {session && (
-                <Avatar>
-                  <AvatarImage alt="" src={session.user?.image ?? undefined} />
-                  <AvatarFallback>{fallBackName}</AvatarFallback>
-                </Avatar>
+              {session ? (
+                <UserDropdownMenu />
+              ) : (
+                <Link href="/api/auth/signin">
+                  <Button>Sign in</Button>
+                </Link>
               )}
-              <Link href={session ? "/api/auth/signout" : "/api/auth/signin"}>
-                <Button> {session ? "Sign out" : "Sign in"}</Button>
-              </Link>
+              <ThemeToggle />
             </div>
-            <ThemeToggle />
           </div>
         </NavigationMenuList>
       </NavigationMenu>
@@ -109,7 +93,7 @@ export const Navbar = () => {
   );
 };
 
-const NavbarMobile = ({
+const MobileSidebar = ({
   isOpen,
   setIsOpen,
   routeList,
@@ -156,7 +140,7 @@ const NavbarMobile = ({
   );
 };
 
-const NavbarDesktop = ({ routeList }: { routeList: RouteProps[] }) => {
+const MainNavBar = ({ routeList }: { routeList: RouteProps[] }) => {
   return (
     <nav className="hidden gap-2 md:flex">
       {routeList.map((route: RouteProps, i) => (
