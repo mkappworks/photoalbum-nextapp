@@ -5,21 +5,21 @@ import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
-} from "../ui/navigation-menu";
+} from "@components/ui/navigation-menu";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "../ui/sheet";
+} from "@components/ui/sheet";
 
-import { Button, buttonVariants } from "../ui/button";
+import { Button, buttonVariants } from "@components/ui/button";
 import { Menu } from "lucide-react";
-import { ThemeToggle } from "./theme-toggle/theme-toggle";
+import { ThemeToggle } from "@components/layout/theme-toggle/theme-toggle";
 import { signIn, useSession } from "next-auth/react";
-import { UserDropdownMenu } from "./user-dropdown-menu";
-import { LogoIconName } from "../logo-icon-name";
+import { UserDropdownMenu } from "@components/layout/user-dropdown-menu";
+import { LogoIconName } from "@components/logo-icon-name";
 
 interface RouteProps {
   href: string;

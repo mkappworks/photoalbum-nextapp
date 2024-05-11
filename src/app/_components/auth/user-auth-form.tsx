@@ -10,8 +10,8 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { signIn } from "next-auth/react";
-import { GoogleIcon } from "~/app/_components/home/icons";
-import { Button } from "~/app/_components/ui/button";
+import { GoogleIcon } from "@components/home/icons";
+import { Button } from "@components/ui/button";
 import {
   Form,
   FormControl,
@@ -19,8 +19,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../_components/ui/form";
-import { Input } from "../../_components/ui/input";
+} from "@components/ui/form";
+import { Input } from "@components/ui/input";
 
 export const signInSchema = z.object({
   email: z

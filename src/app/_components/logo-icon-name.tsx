@@ -1,4 +1,4 @@
-import { LogoIcon } from "./home/icons";
+import { LogoIcon } from "@components/home/icons";
 
 export const LogoIconName = () => {
   return (

@@ -1,10 +1,10 @@
-import "~/styles/globals.css";
+import "@/styles/globals.css";
 
 import { Inter } from "next/font/google";
 
-import { TRPCReactProvider } from "~/trpc/react";
-import { getServerAuthSession } from "~/server/auth";
-import { Providers } from "./_components/layout/providers";
+import { TRPCReactProvider } from "@/trpc/react";
+import { getServerAuthSession } from "@/server/auth";
+import { Providers } from "@components/layout/providers";
 
 const inter = Inter({
   subsets: ["latin"],

@@ -1,7 +1,7 @@
 "use client";
 
 import { SessionProvider, type SessionProviderProps } from "next-auth/react";
-import { ThemeProvider } from "./theme-toggle/theme-provider";
+import { ThemeProvider } from "@components/layout/theme-toggle/theme-provider";
 
 export const Providers = ({
   session,
