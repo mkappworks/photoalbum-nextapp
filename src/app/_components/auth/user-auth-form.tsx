@@ -1,15 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import { signIn } from "next-auth/react";
+import { api } from "@/trpc/react";
+
 import { GoogleIcon } from "@components/icons/icons";
 import { Button } from "@components/ui/button";
 import {
@@ -21,45 +17,43 @@ import {
   FormMessage,
 } from "@components/ui/form";
 import { Input } from "@components/ui/input";
-
-export const signInSchema = z.object({
-  email: z
-    .string({ required_error: "Email is required" })
-    .min(1, "Email is required")
-    .email("Invalid email"),
-  password: z
-    .string({ required_error: "Password is required" })
-    .min(1, "Password is required")
-    .min(8, "Password must be more than 8 characters")
-    .max(32, "Password must be less than 32 characters"),
-});
-
-type UserFormValue = z.infer<typeof signInSchema>;
+import {
+  CredentialsSchema,
+  type CredentialsSchemaType,
+} from "@/schema/credentials";
 
 export const UserAuthForm = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
-  const [loading, setLoading] = useState<boolean>(false);
 
-  const form = useForm<UserFormValue>({
-    resolver: zodResolver(signInSchema),
+  const form = useForm<CredentialsSchemaType>({
+    resolver: zodResolver(CredentialsSchema),
   });
 
-  const onSubmit = async (data: UserFormValue) => {
-    setLoading(true);
-    await signIn("credentials", {
-      email: data.email,
-      callbackUrl: callbackUrl ?? "/",
-    });
-
-    setLoading(false);
-  };
+  const registerUser = api.user.register.useMutation({
+    onSuccess: async () => {
+      await signIn("credentials", {
+        email: form.getValues("email"),
+        password: form.getValues("password"),
+        callbackUrl: callbackUrl ?? "/",
+      });
+    },
+    onError: (error: unknown) => {
+      console.error(error);
+    },
+  });
 
   return (
     <>
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={(e) => {
+            e.preventDefault();
+            registerUser.mutate({
+              email: form.getValues("email"),
+              password: form.getValues("password"),
+            });
+          }}
           className="w-full space-y-2"
         >
           <FormField
@@ -72,7 +66,7 @@ export const UserAuthForm = () => {
                   <Input
                     type="email"
                     placeholder="Enter your email..."
-                    disabled={loading}
+                    disabled={registerUser.isPending}
                     {...field}
                   />
                 </FormControl>
@@ -91,7 +85,7 @@ export const UserAuthForm = () => {
                   <Input
                     type="password"
                     placeholder="Enter your password..."
-                    disabled={loading}
+                    disabled={registerUser.isPending}
                     {...field}
                   />
                 </FormControl>
@@ -100,7 +94,11 @@ export const UserAuthForm = () => {
             )}
           />
 
-          <Button disabled={loading} className="ml-auto w-full" type="submit">
+          <Button
+            disabled={registerUser.isPending}
+            className="ml-auto w-full"
+            type="submit"
+          >
             Continue With Email
           </Button>
         </form>
@@ -115,7 +113,7 @@ export const UserAuthForm = () => {
           </span>
         </div>
       </div>
-      <GoogleSignInButton isDisabled={loading} />
+      <GoogleSignInButton isDisabled={registerUser.isPending} />
     </>
   );
 };
