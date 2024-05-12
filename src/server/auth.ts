@@ -11,6 +11,11 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { env } from "@/env";
 import { db } from "@/server/db";
 import { createTable } from "@/server/db/schema";
+import bcrypt from "bcrypt";
+import {
+  CredentialsSchema,
+  type CredentialsSchemaType,
+} from "@/schema/credentials";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -56,26 +61,32 @@ export const authOptions: NextAuthOptions = {
     }),
     CredentialsProvider({
       credentials: {
-        username: { label: "Username", type: "text" },
-        password: { label: "Password", type: "password" },
+        email: {},
+        password: {},
       },
-      async authorize(_) {
-        let user;
-
-        // logic to salt and hash password
-        // const pwHash = saltAndHashPassword(credentials.password);
-
-        // logic to verify if user exists
-        // user = await getUserFromDb(credentials.email, pwHash);
-
-        if (!user) {
-          // No user found, so this is their first attempt to login
-          // meaning this is also the place you could do registration
-          throw new Error("User not found.");
+      async authorize(credentials, _) {
+        let validatedUser: CredentialsSchemaType;
+        try {
+          validatedUser = CredentialsSchema.parse(credentials);
+        } catch (error) {
+          throw new Error("Invalid email and password.");
         }
+        const dbUser = await db.query.users.findFirst({
+          where: (users, { eq }) => eq(users.email, validatedUser.email),
+        });
 
-        // return user object with the their profile data
-        return user;
+        if (!dbUser) throw new Error("User not found.");
+
+        if (dbUser.password === null) throw new Error("Invalid password.");
+
+        const isValidPassword = await bcrypt.compare(
+          validatedUser.password,
+          dbUser.password,
+        );
+
+        if (!isValidPassword) throw new Error("Invalid password.");
+
+        return null;
       },
     }),
   ],
