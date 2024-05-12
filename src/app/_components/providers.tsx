@@ -12,9 +12,11 @@ export const Providers = ({
 }) => {
   return (
     <>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <SessionProvider session={session}>{children}</SessionProvider>
-      </ThemeProvider>
+      <SessionProvider session={session}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
+      </SessionProvider>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { LogoIconName } from "@components/logo-icon-name";
+import { LogoIconName } from "@components/icons/logo-icon-name";
 
 export const Footer = () => {
   return (

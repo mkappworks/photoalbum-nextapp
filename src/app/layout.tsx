@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 
 import { TRPCReactProvider } from "@/trpc/react";
 import { getServerAuthSession } from "@/server/auth";
-import { Providers } from "@components/layout/providers";
+import { Providers } from "@components/providers";
 
 const inter = Inter({
   subsets: ["latin"],

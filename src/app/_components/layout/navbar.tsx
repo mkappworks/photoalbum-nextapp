@@ -19,7 +19,7 @@ import { Menu } from "lucide-react";
 import { ThemeToggle } from "@components/layout/theme-toggle/theme-toggle";
 import { signIn, useSession } from "next-auth/react";
 import { UserDropdownMenu } from "@components/layout/user-dropdown-menu";
-import { LogoIconName } from "@components/logo-icon-name";
+import { LogoIconName } from "@components/icons/logo-icon-name";
 
 interface RouteProps {
   href: string;

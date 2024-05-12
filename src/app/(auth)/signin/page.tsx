@@ -2,7 +2,7 @@ import { type Metadata } from "next";
 import Link from "next/link";
 
 import { UserAuthForm } from "@components/auth/user-auth-form";
-import { LogoIconName } from "@components/logo-icon-name";
+import { LogoIconName } from "@components/icons/logo-icon-name";
 
 export const metadata: Metadata = {
   title: "Photo Album - SignIn",

@@ -10,7 +10,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { signIn } from "next-auth/react";
-import { GoogleIcon } from "@components/home/icons";
+import { GoogleIcon } from "@components/icons/icons";
 import { Button } from "@components/ui/button";
 import {
   Form,
