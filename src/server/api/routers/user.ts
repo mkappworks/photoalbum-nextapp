@@ -1,6 +1,6 @@
+import { CredentialsSchema } from "@/schema/credentials";
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import { users } from "@/server/db/schema";
-import { CredentialsSchema } from "@/schema/credentials";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 

@@ -1,6 +1,11 @@
 "use client";
 
 import { useState } from "react";
+
+import { Menu } from "lucide-react";
+import { signIn, useSession } from "next-auth/react";
+
+import { Button, buttonVariants } from "@components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -13,13 +18,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@components/ui/sheet";
-
-import { Button, buttonVariants } from "@components/ui/button";
-import { Menu } from "lucide-react";
-import { ThemeToggle } from "@components/layout/theme-toggle/theme-toggle";
-import { signIn, useSession } from "next-auth/react";
-import { UserDropdownMenu } from "@components/layout/user-dropdown-menu";
 import { LogoIconName } from "@components/icons/logo-icon-name";
+import { ThemeToggle } from "@components/layout/theme-toggle/theme-toggle";
+import { UserDropdownMenu } from "@components/layout/user-dropdown-menu";
 
 interface RouteProps {
   href: string;

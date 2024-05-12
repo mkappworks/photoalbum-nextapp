@@ -1,12 +1,16 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useForm } from "react-hook-form";
+
+import {
+  CredentialsSchema,
+  type CredentialsSchemaType,
+} from "@/schema/credentials";
+import { api } from "@/trpc/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
-import { api } from "@/trpc/react";
+import { useForm } from "react-hook-form";
 
-import { GoogleIcon } from "@components/icons/icons";
 import { Button } from "@components/ui/button";
 import {
   Form,
@@ -17,10 +21,7 @@ import {
   FormMessage,
 } from "@components/ui/form";
 import { Input } from "@components/ui/input";
-import {
-  CredentialsSchema,
-  type CredentialsSchemaType,
-} from "@/schema/credentials";
+import { GoogleIcon } from "@components/icons/icons";
 
 export const UserAuthForm = () => {
   const searchParams = useSearchParams();

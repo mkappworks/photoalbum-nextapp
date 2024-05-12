@@ -1,3 +1,9 @@
+import Image, { type StaticImageData } from "next/image";
+
+import image from "@public//assets/growth.png";
+import image4 from "@public/assets/looking-ahead.png";
+import image3 from "@public/assets/reflecting.png";
+
 import { Badge } from "@components/ui/badge";
 import {
   Card,
@@ -6,11 +12,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@components/ui/card";
-
-import image from "@public//assets/growth.png";
-import image3 from "@public/assets/reflecting.png";
-import image4 from "@public/assets/looking-ahead.png";
-import Image, { type StaticImageData } from "next/image";
 
 interface FeatureProps {
   title: string;

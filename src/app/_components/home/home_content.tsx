@@ -1,6 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+
 import { FAQ } from "@components/home/faq";
 import { Features } from "@components/home/features";
 import { Hero } from "@components/home/hero";
