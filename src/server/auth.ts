@@ -1,18 +1,12 @@
-import {
-  CredentialsSchema,
-  type CredentialsSchemaType,
-} from "@/schema/credentials";
 import { db } from "@/server/db";
 import { createTable } from "@/server/db/schema";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import bcrypt from "bcrypt";
 import {
   getServerSession,
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
 import { type Adapter } from "next-auth/adapters";
-import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
 import { env } from "@/env";
@@ -58,36 +52,6 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
-    }),
-    CredentialsProvider({
-      credentials: {
-        email: {},
-        password: {},
-      },
-      async authorize(credentials, _) {
-        let validatedUser: CredentialsSchemaType;
-        try {
-          validatedUser = CredentialsSchema.parse(credentials);
-        } catch (error) {
-          throw new Error("Invalid email and password.");
-        }
-        const dbUser = await db.query.users.findFirst({
-          where: (users, { eq }) => eq(users.email, validatedUser.email),
-        });
-
-        if (!dbUser) throw new Error("User not found.");
-
-        if (dbUser.password === null) throw new Error("Invalid password.");
-
-        const isValidPassword = await bcrypt.compare(
-          validatedUser.password,
-          dbUser.password,
-        );
-
-        if (!isValidPassword) throw new Error("Invalid password.");
-
-        return null;
-      },
     }),
   ],
   pages: {
