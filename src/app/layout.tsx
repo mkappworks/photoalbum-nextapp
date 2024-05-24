@@ -2,7 +2,6 @@ import "@/styles/globals.css";
 
 import { Inter } from "next/font/google";
 
-import { getServerAuthSession } from "@/server/auth";
 import { TRPCReactProvider } from "@/trpc/react";
 
 import { Providers } from "@components/providers";
@@ -30,15 +29,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerAuthSession();
-
   return (
     <html lang="en">
       <body
         className={`${inter.className} flex min-h-screen flex-col bg-background text-primary`}
       >
         <TRPCReactProvider>
-          <Providers session={session}>{children}</Providers>
+          <Providers>{children}</Providers>
         </TRPCReactProvider>
       </body>
     </html>
