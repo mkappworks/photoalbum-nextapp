@@ -1,7 +1,5 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-
 import {
   CredentialsSchema,
   type CredentialsSchemaType,
@@ -24,9 +22,6 @@ import { Input } from "@components/ui/input";
 import { GoogleIcon } from "@components/icons/icons";
 
 export const UserAuthForm = () => {
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl");
-
   const form = useForm<CredentialsSchemaType>({
     resolver: zodResolver(CredentialsSchema),
   });
@@ -36,7 +31,7 @@ export const UserAuthForm = () => {
       await signIn("credentials", {
         email: form.getValues("email"),
         password: form.getValues("password"),
-        callbackUrl: callbackUrl ?? "/",
+        callbackUrl: "/dashboard",
       });
     },
     onError: (error: unknown) => {
@@ -120,16 +115,13 @@ export const UserAuthForm = () => {
 };
 
 const GoogleSignInButton = ({ isDisabled }: { isDisabled: boolean }) => {
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl");
-
   return (
     <Button
       className="w-full"
       variant="outline"
       type="button"
       disabled={isDisabled}
-      onClick={() => signIn("google", { callbackUrl: callbackUrl ?? "/" })}
+      onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
     >
       <GoogleIcon />
       <span className="ml-2">Continue with Google</span>
