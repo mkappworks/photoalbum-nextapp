@@ -1,5 +1,8 @@
 import { type Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+
+import { getServerAuthSession } from "@/server/auth";
 
 import { UserAuthForm } from "@components/auth/user-auth-form";
 import { LogoIconName } from "@components/icons/logo-icon-name";
@@ -9,7 +12,13 @@ export const metadata: Metadata = {
   description: "Sign in to your account",
 };
 
-export default function SignInPage() {
+export default async function SignInPage() {
+  const session = await getServerAuthSession();
+
+  if (session) {
+    redirect("/dashboard");
+  }
+
   return (
     <div className="relative h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
